@@ -1,0 +1,6 @@
+@BiohackingApi.Web_HostAddress = http://localhost:5189
+
+GET {{BiohackingApi.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

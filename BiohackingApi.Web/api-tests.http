@@ -1,0 +1,144 @@
+### Test Biohacking API Endpoints
+
+### Health Check - Test if API is running
+GET http://localhost:5189/api/motivations
+
+### Create a motivation
+POST http://localhost:5189/api/motivations
+Content-Type: application/json
+
+{
+  "name": "Better Sleep"
+}
+
+### Create another motivation
+POST http://localhost:5189/api/motivations
+Content-Type: application/json
+
+{
+  "name": "Longevity"
+}
+
+### Create a biohack
+POST http://localhost:5189/api/biohacks
+Content-Type: application/json
+
+{
+  "name": "Red Light Therapy",
+  "infoSections": {
+    "duration": "15-20 minutes",
+    "frequency": "Daily",
+    "wavelength": "660nm and 850nm"
+  }
+}
+
+### Create another biohack
+POST http://localhost:5189/api/biohacks
+Content-Type: application/json
+
+{
+  "name": "Cold Plunge",
+  "infoSections": {
+    "temperature": "50-55°F (10-13°C)",
+    "duration": "2-5 minutes",
+    "frequency": "3-4 times per week"
+  }
+}
+
+### Get all motivations
+GET http://localhost:5189/api/motivations
+
+### Get all biohacks
+GET http://localhost:5189/api/biohacks
+
+### Create a user
+POST http://localhost:5189/api/users
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "motivationId": 1
+}
+
+### Create a journal entry
+POST http://localhost:5189/api/journals
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "biohackId": 1,
+  "notes": "Felt very relaxed after the session. Skin looks healthier.",
+  "rating": 8,
+  "dateTime": "2025-07-25T08:00:00Z"
+}
+
+### Link motivation to biohack
+POST http://localhost:5189/api/motivationbiohacks/link
+Content-Type: application/json
+
+{
+  "motivationId": 1,
+  "biohackId": 1
+}
+
+### Get biohacks for a motivation
+GET http://localhost:5189/api/motivations/1/biohacks
+
+### Get all journals
+GET http://localhost:5189/api/journals
+
+### Get all users
+GET http://localhost:5189/api/users
+
+### Get all motivation-biohack relationships
+GET http://localhost:5189/api/motivationbiohacks
+
+### Get specific user
+GET http://localhost:5189/api/users/1
+
+### Update a user
+PUT http://localhost:5189/api/users/1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "john.smith@example.com"
+}
+
+### Delete a journal entry
+DELETE http://localhost:5189/api/journals/1
+
+### Unlink motivation from biohack
+POST http://localhost:5189/api/motivationbiohacks/unlink
+Content-Type: application/json
+
+{
+  "motivationId": 1,
+  "biohackId": 1
+}
+
+### Link user to motivation (by URL parameters)
+POST http://localhost:5189/api/users/1/link-motivation/2
+
+### Link user to motivation (by request body)
+POST http://localhost:5189/api/users/link-motivation
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "motivationId": 1
+}
+
+### Unlink user from motivation (by URL parameter)
+POST http://localhost:5189/api/users/1/unlink-motivation
+
+### Unlink user from motivation (by request body)
+POST http://localhost:5189/api/users/unlink-motivation
+Content-Type: application/json
+
+{
+  "userId": 1
+}

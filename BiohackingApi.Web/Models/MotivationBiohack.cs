@@ -6,16 +6,11 @@ namespace BiohackingApi.Web.Models;
 [Table("motivation_biohacks")]
 public class MotivationBiohack
 {
-    [Key, Column("motivation_id", Order = 0)]
+    [System.ComponentModel.DataAnnotations.Schema.Column("motivation_id")]
     public int MotivationId { get; set; }
+    public Motivation Motivation { get; set; } = null!;
 
-    [Key, Column("biohack_id", Order = 1)]
+    [System.ComponentModel.DataAnnotations.Schema.Column("biohack_id")]
     public int BiohackId { get; set; }
-
-    // Navigation properties
-    [ForeignKey("MotivationId")]
-    public virtual Motivation Motivation { get; set; } = null!;
-
-    [ForeignKey("BiohackId")]
-    public virtual Biohack Biohack { get; set; } = null!;
+    public Biohack Biohack { get; set; } = null!;
 }

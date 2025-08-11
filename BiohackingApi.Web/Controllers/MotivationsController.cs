@@ -28,7 +28,9 @@ public class MotivationsController : ControllerBase
             .Select(m => new ReadMotivationDto
             {
                 Id = m.Id,
-                Name = m.Name,
+                Title = m.Title,
+                Description = m.Description,
+                Category = m.Category,
                 CreatedDate = m.CreatedDate,
                 UpdatedDate = m.UpdatedDate
             })
@@ -50,7 +52,9 @@ public class MotivationsController : ControllerBase
             .Select(m => new ReadMotivationDto
             {
                 Id = m.Id,
-                Name = m.Name,
+                Title = m.Title,
+                Description = m.Description,
+                Category = m.Category,
                 CreatedDate = m.CreatedDate,
                 UpdatedDate = m.UpdatedDate
             })
@@ -83,8 +87,16 @@ public class MotivationsController : ControllerBase
             .Select(mb => new ReadBiohackDto
             {
                 Id = mb.Biohack.Id,
-                Name = mb.Biohack.Name,
-                InfoSections = mb.Biohack.InfoSectionsJson,
+                Title = mb.Biohack.Title,
+                Technique = mb.Biohack.Technique,
+                Category = mb.Biohack.Category,
+                Difficulty = mb.Biohack.Difficulty,
+                TimeRequired = mb.Biohack.TimeRequired,
+                Action = mb.Biohack.Action,
+                Mechanism = mb.Biohack.Mechanism,
+                ResearchStudies = mb.Biohack.ResearchStudies,
+                Biology = mb.Biohack.Biology,
+                ColorGradient = mb.Biohack.ColorGradient,
                 CreatedDate = mb.Biohack.CreatedDate,
                 UpdatedDate = mb.Biohack.UpdatedDate
             })
@@ -103,7 +115,9 @@ public class MotivationsController : ControllerBase
     {
         var motivation = new Motivation
         {
-            Name = createMotivationDto.Name,
+            Title = createMotivationDto.Title,
+            Description = createMotivationDto.Description,
+            Category = createMotivationDto.Category,
             CreatedDate = DateTime.UtcNow,
             UpdatedDate = DateTime.UtcNow
         };
@@ -114,7 +128,9 @@ public class MotivationsController : ControllerBase
         var result = new ReadMotivationDto
         {
             Id = motivation.Id,
-            Name = motivation.Name,
+            Title = motivation.Title,
+            Description = motivation.Description,
+            Category = motivation.Category,
             CreatedDate = motivation.CreatedDate,
             UpdatedDate = motivation.UpdatedDate
         };
@@ -138,8 +154,12 @@ public class MotivationsController : ControllerBase
         }
 
         // Update only provided fields
-        if (updateMotivationDto.Name != null)
-            motivation.Name = updateMotivationDto.Name;
+        if (updateMotivationDto.Title != null)
+            motivation.Title = updateMotivationDto.Title;
+        if (updateMotivationDto.Description != null)
+            motivation.Description = updateMotivationDto.Description;
+        if (updateMotivationDto.Category != null)
+            motivation.Category = updateMotivationDto.Category;
 
         motivation.UpdatedDate = DateTime.UtcNow;
 
@@ -148,7 +168,9 @@ public class MotivationsController : ControllerBase
         var result = new ReadMotivationDto
         {
             Id = motivation.Id,
-            Name = motivation.Name,
+            Title = motivation.Title,
+            Description = motivation.Description,
+            Category = motivation.Category,
             CreatedDate = motivation.CreatedDate,
             UpdatedDate = motivation.UpdatedDate
         };

@@ -6,21 +6,18 @@ namespace BiohackingApi.Web.Models;
 [Table("motivations")]
 public class Motivation
 {
-    [Key]
-    [Column("id")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("id")]
     public int Id { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("title")]
+    public string Title { get; set; } = null!;
+    [System.ComponentModel.DataAnnotations.Schema.Column("description")]
+    public string? Description { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("category")]
+    public string? Category { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("createddate")]
+    public DateTime CreatedDate { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("updateddate")]
+    public DateTime UpdatedDate { get; set; }
 
-    [Required]
-    [Column("name")]
-    public string Name { get; set; } = string.Empty;
-
-    [Column("createddate")]
-    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-
-    [Column("updateddate")]
-    public DateTime UpdatedDate { get; set; } = DateTime.UtcNow;
-
-    // Navigation properties
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
-    public virtual ICollection<MotivationBiohack> MotivationBiohacks { get; set; } = new List<MotivationBiohack>();
+    public ICollection<MotivationBiohack>? MotivationBiohacks { get; set; }
 }

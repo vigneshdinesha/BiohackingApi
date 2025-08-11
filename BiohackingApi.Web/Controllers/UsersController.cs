@@ -36,7 +36,7 @@ public class UsersController : ControllerBase
                 ExternalId = u.ExternalId,
                 SubId = u.SubId,
                 MotivationId = u.MotivationId,
-                MotivationName = u.Motivation != null ? u.Motivation.Name : null,
+                MotivationName = u.Motivation != null ? u.Motivation.Title : null,
                 CreatedDate = u.CreatedDate,
                 UpdatedDate = u.UpdatedDate
             })
@@ -66,7 +66,7 @@ public class UsersController : ControllerBase
                 ExternalId = u.ExternalId,
                 SubId = u.SubId,
                 MotivationId = u.MotivationId,
-                MotivationName = u.Motivation != null ? u.Motivation.Name : null,
+                MotivationName = u.Motivation != null ? u.Motivation.Title : null,
                 CreatedDate = u.CreatedDate,
                 UpdatedDate = u.UpdatedDate
             })
@@ -138,7 +138,7 @@ public class UsersController : ControllerBase
             ExternalId = user.ExternalId,
             SubId = user.SubId,
             MotivationId = user.MotivationId,
-            MotivationName = user.Motivation?.Name,
+            MotivationName = user.Motivation?.Title,
             CreatedDate = user.CreatedDate,
             UpdatedDate = user.UpdatedDate
         };
@@ -214,7 +214,7 @@ public class UsersController : ControllerBase
             ExternalId = user.ExternalId,
             SubId = user.SubId,
             MotivationId = user.MotivationId,
-            MotivationName = user.Motivation?.Name,
+            MotivationName = user.Motivation?.Title,
             CreatedDate = user.CreatedDate,
             UpdatedDate = user.UpdatedDate
         };
@@ -284,7 +284,7 @@ public class UsersController : ControllerBase
             ExternalId = user.ExternalId,
             SubId = user.SubId,
             MotivationId = user.MotivationId,
-            MotivationName = user.Motivation?.Name,
+            MotivationName = user.Motivation?.Title,
             CreatedDate = user.CreatedDate,
             UpdatedDate = user.UpdatedDate
         };

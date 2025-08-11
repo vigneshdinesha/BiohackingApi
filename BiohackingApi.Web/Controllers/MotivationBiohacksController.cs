@@ -30,9 +30,9 @@ public class MotivationBiohacksController : ControllerBase
             .Select(mb => new ReadMotivationBiohackDto
             {
                 MotivationId = mb.MotivationId,
-                MotivationName = mb.Motivation.Name,
+                MotivationTitle = mb.Motivation.Title,
                 BiohackId = mb.BiohackId,
-                BiohackName = mb.Biohack.Name
+                BiohackTitle = mb.Biohack.Title
             })
             .ToListAsync();
 
@@ -55,9 +55,9 @@ public class MotivationBiohacksController : ControllerBase
             .Select(mb => new ReadMotivationBiohackDto
             {
                 MotivationId = mb.MotivationId,
-                MotivationName = mb.Motivation.Name,
+                MotivationTitle = mb.Motivation.Title,
                 BiohackId = mb.BiohackId,
-                BiohackName = mb.Biohack.Name
+                BiohackTitle = mb.Biohack.Title
             })
             .FirstOrDefaultAsync();
 
@@ -120,9 +120,9 @@ public class MotivationBiohacksController : ControllerBase
         var result = new ReadMotivationBiohackDto
         {
             MotivationId = motivationBiohack.MotivationId,
-            MotivationName = motivationBiohack.Motivation.Name,
+            MotivationTitle = motivationBiohack.Motivation.Title,
             BiohackId = motivationBiohack.BiohackId,
-            BiohackName = motivationBiohack.Biohack.Name
+            BiohackTitle = motivationBiohack.Biohack.Title
         };
 
         return CreatedAtAction(nameof(GetMotivationBiohack), 

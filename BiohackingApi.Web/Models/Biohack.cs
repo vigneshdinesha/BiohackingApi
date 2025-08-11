@@ -7,32 +7,32 @@ namespace BiohackingApi.Web.Models;
 [Table("biohacks")]
 public class Biohack
 {
-    [Key]
-    [Column("id")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("id")]
     public int Id { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("title")]
+    public string Title { get; set; } = null!;
+    [System.ComponentModel.DataAnnotations.Schema.Column("technique")]
+    public string? Technique { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("category")]
+    public string? Category { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("difficulty")]
+    public string? Difficulty { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("timerequired")]
+    public string? TimeRequired { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("action")]
+    public List<string> Action { get; set; } = new();
+    [System.ComponentModel.DataAnnotations.Schema.Column("mechanism")]
+    public string? Mechanism { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("researchstudies")]
+    public string? ResearchStudies { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("biology")]
+    public string? Biology { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("colorgradient")]
+    public string? ColorGradient { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("createddate")]
+    public DateTime CreatedDate { get; set; }
+    [System.ComponentModel.DataAnnotations.Schema.Column("updateddate")]
+    public DateTime UpdatedDate { get; set; }
 
-    [Required]
-    [Column("name")]
-    public string Name { get; set; } = string.Empty;
-
-    [Column("info_sections", TypeName = "jsonb")]
-    public string? InfoSections { get; set; }
-
-    [Column("createddate")]
-    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-
-    [Column("updateddate")]
-    public DateTime UpdatedDate { get; set; } = DateTime.UtcNow;
-
-    // Navigation properties
-    public virtual ICollection<Journal> Journals { get; set; } = new List<Journal>();
-    public virtual ICollection<MotivationBiohack> MotivationBiohacks { get; set; } = new List<MotivationBiohack>();
-
-    // Helper property to work with JSON data
-    [NotMapped]
-    public JsonDocument? InfoSectionsJson
-    {
-        get => string.IsNullOrEmpty(InfoSections) ? null : JsonDocument.Parse(InfoSections);
-        set => InfoSections = value?.RootElement.GetRawText();
-    }
+    public ICollection<MotivationBiohack>? MotivationBiohacks { get; set; }
 }

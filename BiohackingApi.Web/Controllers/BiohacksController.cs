@@ -28,8 +28,16 @@ public class BiohacksController : ControllerBase
             .Select(b => new ReadBiohackDto
             {
                 Id = b.Id,
-                Name = b.Name,
-                InfoSections = b.InfoSectionsJson,
+                Title = b.Title,
+                Technique = b.Technique,
+                Category = b.Category,
+                Difficulty = b.Difficulty,
+                TimeRequired = b.TimeRequired,
+                Action = b.Action,
+                Mechanism = b.Mechanism,
+                ResearchStudies = b.ResearchStudies,
+                Biology = b.Biology,
+                ColorGradient = b.ColorGradient,
                 CreatedDate = b.CreatedDate,
                 UpdatedDate = b.UpdatedDate
             })
@@ -51,8 +59,16 @@ public class BiohacksController : ControllerBase
             .Select(b => new ReadBiohackDto
             {
                 Id = b.Id,
-                Name = b.Name,
-                InfoSections = b.InfoSectionsJson,
+                Title = b.Title,
+                Technique = b.Technique,
+                Category = b.Category,
+                Difficulty = b.Difficulty,
+                TimeRequired = b.TimeRequired,
+                Action = b.Action,
+                Mechanism = b.Mechanism,
+                ResearchStudies = b.ResearchStudies,
+                Biology = b.Biology,
+                ColorGradient = b.ColorGradient,
                 CreatedDate = b.CreatedDate,
                 UpdatedDate = b.UpdatedDate
             })
@@ -76,8 +92,16 @@ public class BiohacksController : ControllerBase
     {
         var biohack = new Biohack
         {
-            Name = createBiohackDto.Name,
-            InfoSectionsJson = createBiohackDto.InfoSections,
+            Title = createBiohackDto.Title,
+            Technique = createBiohackDto.Technique,
+            Category = createBiohackDto.Category,
+            Difficulty = createBiohackDto.Difficulty,
+            TimeRequired = createBiohackDto.TimeRequired,
+            Action = createBiohackDto.Action,
+            Mechanism = createBiohackDto.Mechanism,
+            ResearchStudies = createBiohackDto.ResearchStudies,
+            Biology = createBiohackDto.Biology,
+            ColorGradient = createBiohackDto.ColorGradient,
             CreatedDate = DateTime.UtcNow,
             UpdatedDate = DateTime.UtcNow
         };
@@ -88,8 +112,16 @@ public class BiohacksController : ControllerBase
         var result = new ReadBiohackDto
         {
             Id = biohack.Id,
-            Name = biohack.Name,
-            InfoSections = biohack.InfoSectionsJson,
+            Title = biohack.Title,
+            Technique = biohack.Technique,
+            Category = biohack.Category,
+            Difficulty = biohack.Difficulty,
+            TimeRequired = biohack.TimeRequired,
+            Action = biohack.Action,
+            Mechanism = biohack.Mechanism,
+            ResearchStudies = biohack.ResearchStudies,
+            Biology = biohack.Biology,
+            ColorGradient = biohack.ColorGradient,
             CreatedDate = biohack.CreatedDate,
             UpdatedDate = biohack.UpdatedDate
         };
@@ -113,11 +145,26 @@ public class BiohacksController : ControllerBase
         }
 
         // Update only provided fields
-        if (updateBiohackDto.Name != null)
-            biohack.Name = updateBiohackDto.Name;
-        
-        if (updateBiohackDto.InfoSections != null)
-            biohack.InfoSectionsJson = updateBiohackDto.InfoSections;
+        if (updateBiohackDto.Title != null)
+            biohack.Title = updateBiohackDto.Title;
+        if (updateBiohackDto.Technique != null)
+            biohack.Technique = updateBiohackDto.Technique;
+        if (updateBiohackDto.Category != null)
+            biohack.Category = updateBiohackDto.Category;
+        if (updateBiohackDto.Difficulty != null)
+            biohack.Difficulty = updateBiohackDto.Difficulty;
+        if (updateBiohackDto.TimeRequired != null)
+            biohack.TimeRequired = updateBiohackDto.TimeRequired;
+        if (updateBiohackDto.Action != null)
+            biohack.Action = updateBiohackDto.Action;
+        if (updateBiohackDto.Mechanism != null)
+            biohack.Mechanism = updateBiohackDto.Mechanism;
+        if (updateBiohackDto.ResearchStudies != null)
+            biohack.ResearchStudies = updateBiohackDto.ResearchStudies;
+        if (updateBiohackDto.Biology != null)
+            biohack.Biology = updateBiohackDto.Biology;
+        if (updateBiohackDto.ColorGradient != null)
+            biohack.ColorGradient = updateBiohackDto.ColorGradient;
 
         biohack.UpdatedDate = DateTime.UtcNow;
 
@@ -126,8 +173,16 @@ public class BiohacksController : ControllerBase
         var result = new ReadBiohackDto
         {
             Id = biohack.Id,
-            Name = biohack.Name,
-            InfoSections = biohack.InfoSectionsJson,
+            Title = biohack.Title,
+            Technique = biohack.Technique,
+            Category = biohack.Category,
+            Difficulty = biohack.Difficulty,
+            TimeRequired = biohack.TimeRequired,
+            Action = biohack.Action,
+            Mechanism = biohack.Mechanism,
+            ResearchStudies = biohack.ResearchStudies,
+            Biology = biohack.Biology,
+            ColorGradient = biohack.ColorGradient,
             CreatedDate = biohack.CreatedDate,
             UpdatedDate = biohack.UpdatedDate
         };

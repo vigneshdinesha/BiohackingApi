@@ -48,3 +48,4 @@
 /Users/vig/BiohackingApi/BiohackingApi.Web/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
 /Users/vig/BiohackingApi/BiohackingApi.Web/obj/Debug/net8.0/staticwebassets.build.json.cache
 /Users/vig/BiohackingApi/BiohackingApi.Web/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/Users/vig/BiohackingApi/BiohackingApi.Web/obj/Debug/net8.0/BiohackingApi.Web.sourcelink.json

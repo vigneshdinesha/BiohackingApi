@@ -11,33 +11,33 @@ public class User
     public int Id { get; set; }
 
     [Required]
-    [Column("firstname")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("firstname")]
     public string FirstName { get; set; } = string.Empty;
 
     [Required]
-    [Column("lastname")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("lastname")]
     public string LastName { get; set; } = string.Empty;
 
     [Required]
-    [Column("email")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("email")]
     public string Email { get; set; } = string.Empty;
 
-    [Column("provider")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("provider")]
     public string? Provider { get; set; }
 
-    [Column("externalid")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("externalid")]
     public string? ExternalId { get; set; }
 
-    [Column("subid")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("subid")]
     public string? SubId { get; set; }
 
-    [Column("motivationid")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("motivationid")]
     public int? MotivationId { get; set; }
 
-    [Column("createddate")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("createddate")]
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
-    [Column("updateddate")]
+    [System.ComponentModel.DataAnnotations.Schema.Column("updateddate")]
     public DateTime UpdatedDate { get; set; } = DateTime.UtcNow;
 
     // Navigation properties

@@ -38,7 +38,7 @@ public class BiohackingDbContext : DbContext
 
         modelBuilder.Entity<User>()
             .HasOne(u => u.Motivation)
-            .WithMany(m => m.Users)
+            .WithMany()
             .HasForeignKey(u => u.MotivationId)
             .OnDelete(DeleteBehavior.SetNull);
 
@@ -50,7 +50,7 @@ public class BiohackingDbContext : DbContext
 
         modelBuilder.Entity<Journal>()
             .HasOne(j => j.Biohack)
-            .WithMany(b => b.Journals)
+            .WithMany()
             .HasForeignKey(j => j.BiohackId)
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -59,9 +59,9 @@ public class BiohackingDbContext : DbContext
             .HasIndex(u => u.Email)
             .IsUnique();
 
-        // Configure JSON column for PostgreSQL
+        // Configure Action array for PostgreSQL
         modelBuilder.Entity<Biohack>()
-            .Property(b => b.InfoSections)
-            .HasColumnType("jsonb");
+            .Property(b => b.Action)
+            .HasColumnType("text[]");
     }
 }

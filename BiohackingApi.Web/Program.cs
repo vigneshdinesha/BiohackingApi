@@ -4,6 +4,16 @@ using BiohackingApi.Web.Repositories;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+// Add CORS policy for frontend dev servers
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => policy
+            .WithOrigins("http://localhost:3000", "http://localhost:3001")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+    );
+});
 
 // Add services to the container.
 builder.Services.AddControllers()
@@ -45,6 +55,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+// Use CORS before controllers
+app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

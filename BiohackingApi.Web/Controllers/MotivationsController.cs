@@ -30,7 +30,6 @@ public class MotivationsController : ControllerBase
                 Id = m.Id,
                 Title = m.Title,
                 Description = m.Description,
-                Category = m.Category,
                 CreatedDate = m.CreatedDate,
                 UpdatedDate = m.UpdatedDate
             })
@@ -54,7 +53,6 @@ public class MotivationsController : ControllerBase
                 Id = m.Id,
                 Title = m.Title,
                 Description = m.Description,
-                Category = m.Category,
                 CreatedDate = m.CreatedDate,
                 UpdatedDate = m.UpdatedDate
             })
@@ -117,7 +115,6 @@ public class MotivationsController : ControllerBase
         {
             Title = createMotivationDto.Title,
             Description = createMotivationDto.Description,
-            Category = createMotivationDto.Category,
             CreatedDate = DateTime.UtcNow,
             UpdatedDate = DateTime.UtcNow
         };
@@ -130,7 +127,6 @@ public class MotivationsController : ControllerBase
             Id = motivation.Id,
             Title = motivation.Title,
             Description = motivation.Description,
-            Category = motivation.Category,
             CreatedDate = motivation.CreatedDate,
             UpdatedDate = motivation.UpdatedDate
         };
@@ -158,8 +154,6 @@ public class MotivationsController : ControllerBase
             motivation.Title = updateMotivationDto.Title;
         if (updateMotivationDto.Description != null)
             motivation.Description = updateMotivationDto.Description;
-        if (updateMotivationDto.Category != null)
-            motivation.Category = updateMotivationDto.Category;
 
         motivation.UpdatedDate = DateTime.UtcNow;
 
@@ -170,7 +164,6 @@ public class MotivationsController : ControllerBase
             Id = motivation.Id,
             Title = motivation.Title,
             Description = motivation.Description,
-            Category = motivation.Category,
             CreatedDate = motivation.CreatedDate,
             UpdatedDate = motivation.UpdatedDate
         };

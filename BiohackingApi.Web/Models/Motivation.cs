@@ -12,8 +12,6 @@ public class Motivation
     public string Title { get; set; } = null!;
     [System.ComponentModel.DataAnnotations.Schema.Column("description")]
     public string? Description { get; set; }
-    [System.ComponentModel.DataAnnotations.Schema.Column("category")]
-    public string? Category { get; set; }
     [System.ComponentModel.DataAnnotations.Schema.Column("createddate")]
     public DateTime CreatedDate { get; set; }
     [System.ComponentModel.DataAnnotations.Schema.Column("updateddate")]

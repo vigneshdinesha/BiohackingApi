@@ -4,6 +4,20 @@ using System.Text.Json;
 
 namespace BiohackingApi.Web.Models;
 
+public enum BiohackCategory
+{
+    WellnessAndBalance,
+    PerformanceAndProductivity,
+    FitnessAndPhysicalVitality,
+    TransformationAndSelfDiscovery,
+    SocialGrowthAndConnection,
+    TimeManagement,
+    NutritionAndSupplementation,
+    SleepOptimization,
+    StressManagement,
+    CognitiveEnhancement
+}
+
 [Table("biohacks")]
 public class Biohack
 {
@@ -14,7 +28,7 @@ public class Biohack
     [System.ComponentModel.DataAnnotations.Schema.Column("technique")]
     public string? Technique { get; set; }
     [System.ComponentModel.DataAnnotations.Schema.Column("category")]
-    public string? Category { get; set; }
+    public BiohackCategory? Category { get; set; }
     [System.ComponentModel.DataAnnotations.Schema.Column("difficulty")]
     public string? Difficulty { get; set; }
     [System.ComponentModel.DataAnnotations.Schema.Column("timerequired")]

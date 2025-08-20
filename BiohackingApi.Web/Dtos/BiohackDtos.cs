@@ -1,4 +1,5 @@
 using System.Text.Json;
+using BiohackingApi.Web.Models;
 
 namespace BiohackingApi.Web.Dtos;
 
@@ -7,7 +8,7 @@ public class CreateBiohackDto
 {
     public string Title { get; set; } = null!;
     public string? Technique { get; set; }
-    public string? Category { get; set; }
+    public BiohackCategory? Category { get; set; }
     public string? Difficulty { get; set; }
     public string? TimeRequired { get; set; }
     public List<string> Action { get; set; } = new();
@@ -21,7 +22,7 @@ public class UpdateBiohackDto
 {
     public string? Title { get; set; }
     public string? Technique { get; set; }
-    public string? Category { get; set; }
+    public BiohackCategory? Category { get; set; }
     public string? Difficulty { get; set; }
     public string? TimeRequired { get; set; }
     public List<string>? Action { get; set; }
@@ -36,7 +37,7 @@ public class ReadBiohackDto
     public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string? Technique { get; set; }
-    public string? Category { get; set; }
+    public BiohackCategory? Category { get; set; }
     public string? Difficulty { get; set; }
     public string? TimeRequired { get; set; }
     public List<string> Action { get; set; } = new();
@@ -46,4 +47,14 @@ public class ReadBiohackDto
     public string? ColorGradient { get; set; }
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
+}
+
+// Filter DTO for advanced biohack filtering
+public class BiohackFilterDto
+{
+    public BiohackCategory? Category { get; set; }
+    public string? Technique { get; set; }
+    public string? Difficulty { get; set; }
+    public string? TimeRequired { get; set; }
+    public string? SearchTerm { get; set; } // For searching in title, mechanism, or biology
 }

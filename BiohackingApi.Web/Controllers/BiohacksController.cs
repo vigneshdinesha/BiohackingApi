@@ -47,6 +47,169 @@ public class BiohacksController : ControllerBase
     }
 
     /// <summary>
+    /// Get filtered biohacks based on various criteria
+    /// </summary>
+    /// <param name="filter">Filter criteria</param>
+    /// <returns>Filtered list of biohacks</returns>
+    [HttpPost("filter")]
+    public async Task<ActionResult<IEnumerable<ReadBiohackDto>>> GetFilteredBiohacks([FromBody] BiohackFilterDto filter)
+    {
+        var query = _context.Biohacks.AsQueryable();
+
+        // Filter by category if specified
+        if (filter.Category.HasValue)
+        {
+            query = query.Where(b => b.Category == filter.Category.Value);
+        }
+
+        // Filter by technique if specified
+        if (!string.IsNullOrWhiteSpace(filter.Technique))
+        {
+            query = query.Where(b => b.Technique != null && b.Technique.ToLower().Contains(filter.Technique.ToLower()));
+        }
+
+        // Filter by difficulty if specified
+        if (!string.IsNullOrWhiteSpace(filter.Difficulty))
+        {
+            query = query.Where(b => b.Difficulty != null && b.Difficulty.ToLower().Contains(filter.Difficulty.ToLower()));
+        }
+
+        // Filter by time required if specified
+        if (!string.IsNullOrWhiteSpace(filter.TimeRequired))
+        {
+            query = query.Where(b => b.TimeRequired != null && b.TimeRequired.ToLower().Contains(filter.TimeRequired.ToLower()));
+        }
+
+        // Search in title, mechanism, or biology if search term is specified
+        if (!string.IsNullOrWhiteSpace(filter.SearchTerm))
+        {
+            var searchLower = filter.SearchTerm.ToLower();
+            query = query.Where(b => 
+                b.Title.ToLower().Contains(searchLower) ||
+                (b.Mechanism != null && b.Mechanism.ToLower().Contains(searchLower)) ||
+                (b.Biology != null && b.Biology.ToLower().Contains(searchLower)));
+        }
+
+        var biohacks = await query
+            .Select(b => new ReadBiohackDto
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Technique = b.Technique,
+                Category = b.Category,
+                Difficulty = b.Difficulty,
+                TimeRequired = b.TimeRequired,
+                Action = b.Action,
+                Mechanism = b.Mechanism,
+                ResearchStudies = b.ResearchStudies,
+                Biology = b.Biology,
+                ColorGradient = b.ColorGradient,
+                CreatedDate = b.CreatedDate,
+                UpdatedDate = b.UpdatedDate
+            })
+            .ToListAsync();
+
+        return Ok(biohacks);
+    }
+
+    /// <summary>
+    /// Get biohacks by category (simple filter endpoint)
+    /// </summary>
+    /// <param name="category">Category to filter by</param>
+    /// <returns>List of biohacks in the specified category</returns>
+    [HttpGet("category/{category}")]
+    public async Task<ActionResult<IEnumerable<ReadBiohackDto>>> GetBiohacksByCategory(BiohackCategory category)
+    {
+        var biohacks = await _context.Biohacks
+            .Where(b => b.Category == category)
+            .Select(b => new ReadBiohackDto
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Technique = b.Technique,
+                Category = b.Category,
+                Difficulty = b.Difficulty,
+                TimeRequired = b.TimeRequired,
+                Action = b.Action,
+                Mechanism = b.Mechanism,
+                ResearchStudies = b.ResearchStudies,
+                Biology = b.Biology,
+                ColorGradient = b.ColorGradient,
+                CreatedDate = b.CreatedDate,
+                UpdatedDate = b.UpdatedDate
+            })
+            .ToListAsync();
+
+        return Ok(biohacks);
+    }
+
+    /// <summary>
+    /// Get biohacks by technique
+    /// </summary>
+    /// <param name="technique">Technique to filter by</param>
+    /// <returns>List of biohacks with the specified technique</returns>
+    [HttpGet("technique/{technique}")]
+    public async Task<ActionResult<IEnumerable<ReadBiohackDto>>> GetBiohacksByTechnique(string technique)
+    {
+        var biohacks = await _context.Biohacks
+            .Where(b => b.Technique != null && b.Technique.ToLower().Contains(technique.ToLower()))
+            .Select(b => new ReadBiohackDto
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Technique = b.Technique,
+                Category = b.Category,
+                Difficulty = b.Difficulty,
+                TimeRequired = b.TimeRequired,
+                Action = b.Action,
+                Mechanism = b.Mechanism,
+                ResearchStudies = b.ResearchStudies,
+                Biology = b.Biology,
+                ColorGradient = b.ColorGradient,
+                CreatedDate = b.CreatedDate,
+                UpdatedDate = b.UpdatedDate
+            })
+            .ToListAsync();
+
+        return Ok(biohacks);
+    }
+
+    /// <summary>
+    /// Get all available biohack categories
+    /// </summary>
+    /// <returns>List of all available categories</returns>
+    [HttpGet("categories")]
+    public ActionResult<IEnumerable<object>> GetCategories()
+    {
+        var categories = Enum.GetValues<BiohackCategory>()
+            .Select(c => new { 
+                Value = (int)c, 
+                Name = c.ToString(),
+                DisplayName = GetCategoryDisplayName(c)
+            });
+
+        return Ok(categories);
+    }
+
+    private static string GetCategoryDisplayName(BiohackCategory category)
+    {
+        return category switch
+        {
+            BiohackCategory.WellnessAndBalance => "Wellness & Balance",
+            BiohackCategory.PerformanceAndProductivity => "Performance & Productivity",
+            BiohackCategory.FitnessAndPhysicalVitality => "Fitness & Physical Vitality",
+            BiohackCategory.TransformationAndSelfDiscovery => "Transformation & Self-Discovery",
+            BiohackCategory.SocialGrowthAndConnection => "Social Growth & Connection",
+            BiohackCategory.TimeManagement => "Time Management",
+            BiohackCategory.NutritionAndSupplementation => "Nutrition & Supplementation",
+            BiohackCategory.SleepOptimization => "Sleep Optimization",
+            BiohackCategory.StressManagement => "Stress Management",
+            BiohackCategory.CognitiveEnhancement => "Cognitive Enhancement",
+            _ => category.ToString()
+        };
+    }
+
+    /// <summary>
     /// Get a specific biohack by ID
     /// </summary>
     /// <param name="id">Biohack ID</param>

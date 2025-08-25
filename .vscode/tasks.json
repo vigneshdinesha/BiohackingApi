@@ -15,6 +15,18 @@
 			"problemMatcher": [
 				"$msCompile"
 			]
+		},
+		{
+			"label": "Run Biohacking API",
+			"type": "shell",
+			"command": "dotnet",
+			"args": [
+				"run",
+				"--project",
+				"BiohackingApi.Web/BiohackingApi.Web.csproj"
+			],
+			"isBackground": true,
+			"group": "build"
 		}
 	]
 }

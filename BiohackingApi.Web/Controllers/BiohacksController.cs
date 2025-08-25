@@ -57,9 +57,10 @@ public class BiohacksController : ControllerBase
         var query = _context.Biohacks.AsQueryable();
 
         // Filter by category if specified
-        if (filter.Category.HasValue)
+        if (!string.IsNullOrWhiteSpace(filter.Category))
         {
-            query = query.Where(b => b.Category == filter.Category.Value);
+            var cat = filter.Category.Trim();
+            query = query.Where(b => b.Category != null && b.Category.ToLower() == cat.ToLower());
         }
 
         // Filter by technique if specified
@@ -118,10 +119,10 @@ public class BiohacksController : ControllerBase
     /// <param name="category">Category to filter by</param>
     /// <returns>List of biohacks in the specified category</returns>
     [HttpGet("category/{category}")]
-    public async Task<ActionResult<IEnumerable<ReadBiohackDto>>> GetBiohacksByCategory(BiohackCategory category)
+    public async Task<ActionResult<IEnumerable<ReadBiohackDto>>> GetBiohacksByCategory(string category)
     {
         var biohacks = await _context.Biohacks
-            .Where(b => b.Category == category)
+            .Where(b => b.Category != null && b.Category.ToLower() == category.ToLower())
             .Select(b => new ReadBiohackDto
             {
                 Id = b.Id,
@@ -181,32 +182,22 @@ public class BiohacksController : ControllerBase
     [HttpGet("categories")]
     public ActionResult<IEnumerable<object>> GetCategories()
     {
-        var categories = Enum.GetValues<BiohackCategory>()
-            .Select(c => new { 
-                Value = (int)c, 
-                Name = c.ToString(),
-                DisplayName = GetCategoryDisplayName(c)
-            });
+        // If you have a fixed set, list them here or query distinct from DB
+        var categories = new []
+        {
+            "Wellness & Balance",
+            "Performance & Productivity",
+            "Fitness & Physical Vitality",
+            "Transformation & Self-Discovery",
+            "Social Growth & Connection",
+            "Time Management",
+            "Nutrition & Supplementation",
+            "Sleep Optimization",
+            "Stress Management",
+            "Cognitive Enhancement"
+        };
 
         return Ok(categories);
-    }
-
-    private static string GetCategoryDisplayName(BiohackCategory category)
-    {
-        return category switch
-        {
-            BiohackCategory.WellnessAndBalance => "Wellness & Balance",
-            BiohackCategory.PerformanceAndProductivity => "Performance & Productivity",
-            BiohackCategory.FitnessAndPhysicalVitality => "Fitness & Physical Vitality",
-            BiohackCategory.TransformationAndSelfDiscovery => "Transformation & Self-Discovery",
-            BiohackCategory.SocialGrowthAndConnection => "Social Growth & Connection",
-            BiohackCategory.TimeManagement => "Time Management",
-            BiohackCategory.NutritionAndSupplementation => "Nutrition & Supplementation",
-            BiohackCategory.SleepOptimization => "Sleep Optimization",
-            BiohackCategory.StressManagement => "Stress Management",
-            BiohackCategory.CognitiveEnhancement => "Cognitive Enhancement",
-            _ => category.ToString()
-        };
     }
 
     /// <summary>

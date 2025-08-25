@@ -83,6 +83,53 @@ public class JournalsController : ControllerBase
     }
 
     /// <summary>
+    /// Get all journals for a specific user and biohack combination
+    /// </summary>
+    /// <param name="userId">User ID</param>
+    /// <param name="biohackId">Biohack ID</param>
+    /// <returns>List of journals for the specified user and biohack</returns>
+    [HttpGet("user/{userId}/biohack/{biohackId}")]
+    public async Task<ActionResult<IEnumerable<ReadJournalDto>>> GetJournalsByUserAndBiohack(int userId, int biohackId)
+    {
+        // Validate user exists
+        var userExists = await _context.Users.AnyAsync(u => u.Id == userId);
+        if (!userExists)
+        {
+            return NotFound($"User with ID {userId} not found.");
+        }
+
+        // Validate biohack exists
+        var biohackExists = await _context.Biohacks.AnyAsync(b => b.Id == biohackId);
+        if (!biohackExists)
+        {
+            return NotFound($"Biohack with ID {biohackId} not found.");
+        }
+
+        var journals = await _context.Journals
+            .Include(j => j.User)
+            .Include(j => j.Biohack)
+            .Where(j => j.UserId == userId && j.BiohackId == biohackId)
+            .Select(j => new ReadJournalDto
+            {
+                Id = j.Id,
+                UserId = j.UserId,
+                UserFirstName = j.User.FirstName,
+                UserLastName = j.User.LastName,
+                BiohackId = j.BiohackId,
+                BiohackName = j.Biohack.Title,
+                Notes = j.Notes,
+                Rating = j.Rating,
+                DateTime = j.DateTime,
+                CreatedDate = j.CreatedDate,
+                UpdatedDate = j.UpdatedDate
+            })
+            .OrderByDescending(j => j.DateTime)
+            .ToListAsync();
+
+        return Ok(journals);
+    }
+
+    /// <summary>
     /// Create a new journal
     /// </summary>
     /// <param name="createJournalDto">Journal creation data</param>

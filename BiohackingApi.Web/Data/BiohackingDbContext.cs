@@ -63,5 +63,10 @@ public class BiohackingDbContext : DbContext
         modelBuilder.Entity<Biohack>()
             .Property(b => b.Action)
             .HasColumnType("text[]");
+
+        // Category is stored as text directly in DB
+        modelBuilder.Entity<Biohack>()
+            .Property(b => b.Category)
+            .HasColumnType("text");
     }
 }

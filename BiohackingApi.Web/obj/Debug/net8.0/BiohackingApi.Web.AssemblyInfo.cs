@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BiohackingApi.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c2dc50361f639ca9732eb6c31c1a97c6ecea7ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6aa600cd55d5cfd96670806f8bc7c91a10e8edb")]
 [assembly: System.Reflection.AssemblyProductAttribute("BiohackingApi.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BiohackingApi.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
